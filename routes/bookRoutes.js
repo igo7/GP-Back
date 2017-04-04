@@ -6,28 +6,19 @@ var routes = (Book) => {
     var bookController = require('../controllers/bookController')(Book);
     console.log('bookController', bookController);
     //console.log(bookRouter.route);
-    bookRouter.use('/:id', (req, res, next) => {
-        Book.findById(req.params.id, (err, resp) => {
-            if (err) {
-                res.status(500).send(err);
-            } else if (resp) {
-                req.book = resp;
-                next();
-            } else {
-                res.status(404).send(err);
-            }
-        });
-    });
+    bookRouter.use('/id/:id', bookController.findByIdInterceptor);
 
     bookRouter.route('/')
         .get(bookController.getAll)
         .post(bookController.post);
 
-    bookRouter.route('/:id')
+    bookRouter.route('/id/:id')
         .get(bookController.findById)
         .put(bookController.update)
         .patch(bookController.patch)
         .delete(bookController.remove);
+
+    bookRouter.route('/test').get(bookController.getReadBooks);
 
     return bookRouter;
 }
