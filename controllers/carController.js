@@ -1,12 +1,12 @@
-var bookController = (Book) => {
+var carController = (Car) => {
     return {
         findByIdInterceptor: (req, res, next) => {
-            Book.findById(req.params.id, (err, resp) => {
+            Car.findById(req.params.id, (err, resp) => {
                 console.log('from intereptor...');
                 if (err) {
                     res.status(500).send(err);
                 } else if (resp) {
-                    req.book = resp;
+                    req.car = resp;
                     next();
                 } else {
                     res.status(404).send(err);
@@ -14,7 +14,7 @@ var bookController = (Book) => {
             })
         },
         post: (req, res) => {
-            Book.create(req.body, (err, resp) => {
+            Car.create(req.body, (err, resp) => {
                 if (err) {
                     console.log('err', err);
                     res.status(500).send(err);
@@ -24,7 +24,7 @@ var bookController = (Book) => {
             })
         },
         getAll: (req, res) => {
-            Book.find((err, resp) => {
+            Car.find((err, resp) => {
                 if (err) {
                     console.log('err', err);
                 } else {
@@ -33,58 +33,49 @@ var bookController = (Book) => {
             });
         },
         findById: (req, res) => {
-            console.log('req.book', req.book);
-            res.json(req.book);
+            console.log('req.car', req.car);
+            res.json(req.car);
         },
         patch: (req, res) => {
-            let newBook = Object.assign(req.book, req.body);
-            console.log('newBook', newBook);
-            Book.update(newBook, (err, resp) => {
+            let newCar = Object.assign(req.car, req.body);
+            console.log('newCar', newCar);
+            Car.update(newCar, (err, resp) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    res.json(newBook);
+                    res.json(newCar);
                 }
             });
         },
         update: (req, res) => {
-            console.log('req.book', req.book.read);
-            delete req.book._id;
+            console.log('req.car', req.car.model);
+            delete req.car._id;
             //let newBook = Object.assign(req.book, req.body);
-            let newBook = {
-                read:req.body.read,
-                title:req.body.title,
-                genre:req.body.genre
+            let newCar = {
+                make:req.body.make || "no make",
+                model:req.body.title || "no title",
+                salvage:req.body.salvage || true,
+                price:req.body.price || "0.00"
             }
-            console.log('newBook', newBook);
-            Book.update(newBook, (err, resp) => {
+            console.log('newCar', newCar);
+            Car.update(newCar, (err, resp) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    res.json(newBook);
+                    res.json(newCar);
                 }
             });
         },
         remove: (req, res) => {
-            req.book.remove((err, resp) => {
+            req.car.remove((err, resp) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
                     res.status(200).send({ message: 'Delete Success!' });
                 }
             });
-        },
-        getReadBooks: (req, res) => {
-            Book.find({ read: true }, (err, resp) => {
-                if (!err) {
-                    res.json(resp);
-                } else {
-                    res.status(500).send(err);
-                }
-
-            });
         }
     }
 }
 
-module.exports = bookController;
+module.exports = carController;

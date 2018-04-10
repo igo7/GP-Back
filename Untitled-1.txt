@@ -1,0 +1,19 @@
+install GIT
+https://git-scm.com/download/win
+
+install nvm 
+https://github.com/coreybutler/nvm-windows/releases
+
+download nvm-setup.zip
+
+install mongodb
+https://www.mongodb.com/download-center#community
+
+navigate to /c/Program Files/MongoDB/Server/3.6/bin
+
+make directory in root (C:) called data/db
+start mongod
+
+
+install postman
+https://www.getpostman.com/apps

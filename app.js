@@ -5,9 +5,10 @@ var express = require('express'),
 var db = mongoose.connect('mongodb://localhost/bookAPI');
 
 var Book = require('./models/bookModel');
+var Car = require('./models/carModel');
+
 var app = express();
 var port = process.env.PORT || 3000;
-
 
 // cors
 // Add headers
@@ -25,19 +26,19 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 bookRouter = require('./routes/bookRoutes')(Book);
+carRouter = require('./routes/carRoutes')(Car);
 
 app.use('/api/books', bookRouter);
+app.use('/api/cars', carRouter);
 
 app.get('/', (req, res) => {
     res.send('welcome');
-})
+});
 
 app.listen(port, () => {
     console.log(`running on port ${port}`);
 });
-
-
