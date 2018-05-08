@@ -2,10 +2,10 @@ var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser');
 
-var db = mongoose.connect('mongodb://localhost/bookAPI');
+var db = mongoose.connect('mongodb://localhost/bookAPI_Express');
 
 var Book = require('./models/bookModel');
-var Car = require('./models/carModel');
+var User = require('./models/userModel');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -30,10 +30,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 bookRouter = require('./routes/bookRoutes')(Book);
-carRouter = require('./routes/carRoutes')(Car);
-
 app.use('/api/books', bookRouter);
-app.use('/api/cars', carRouter);
+
+userRouter = require('./routes/userRoutes')(User);
+console.log('userRoutes', userRouter);
+app.use('/api/users', userRouter);
 
 app.get('/', (req, res) => {
     res.send('welcome');
