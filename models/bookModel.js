@@ -5,7 +5,8 @@ var bookModel = new mongoose.Schema({ // must use mongoose.Schema syntax
     title: { type: String },
     author: { type: String },
     genre: { type: String },
-    read: { type: Boolean, default: true }
+    read: { type: Boolean, default: true },
+    image_url: { type: String }
 });
 
 var Book = mongoose.model('Book', bookModel);

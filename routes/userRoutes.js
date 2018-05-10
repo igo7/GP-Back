@@ -47,6 +47,7 @@ var routes = function (User) {
       req.user.username = req.body.username;
       req.user.password = req.body.password;
       req.user.Email = req.body.Email;
+      req.user.image_url = req.body.image_url;
       req.user.save(function (err) {
         if (err)
           res.status(500).send(err);

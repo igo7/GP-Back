@@ -52,6 +52,8 @@ var routes = function (Book) {
             req.book.author = req.body.author;
             req.book.genre = req.body.genre;
             req.book.read = req.body.read;
+            req.book.img_url = req.body.img_url;
+
             req.book.save(function (err) {
                 if (err)
                     res.status(500).send(err);
@@ -78,10 +80,12 @@ var routes = function (Book) {
         })
         .delete(function (req, res) {
             req.book.remove(function (err) {
+                console.log("This part works", err);
                 if (err)
                     res.status(500).send(err);
                 else {
-                    res.status(204).send('Removed');
+                    console.log("This too");
+                    res.status(200).send({status: "success"});
                 }
             });
         });
