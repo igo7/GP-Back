@@ -46,7 +46,7 @@ var routes = function (User) {
     .put(function (req, res) {
       req.user.username = req.body.username;
       req.user.password = req.body.password;
-      req.user.Email = req.body.Email;
+      req.user.email = req.body.email;
       req.user.image_url = req.body.image_url;
       req.user.save(function (err) {
         if (err)
@@ -74,13 +74,16 @@ var routes = function (User) {
     })
     .delete(function (req, res) {
       req.user.remove(function (err) {
-        if (err)
-          res.status(500).send(err);
-        else {
-          res.status(204).send('Removed');
-        }
+          console.log("This part works", err);
+          if (err)
+              res.status(500).send(err);
+          else {
+              console.log("This too");
+              res.status(200).send({status: "success"});
+          }
       });
     });
+    
 
   userRouter.route('/login')
     .post(function (req, res) {
