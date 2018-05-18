@@ -52,7 +52,7 @@ var routes = function (Book) {
             req.book.author = req.body.author;
             req.book.genre = req.body.genre;
             req.book.read = req.body.read;
-            req.book.img_url = req.body.img_url;
+            req.book.image_url = req.body.image_url;
 
             req.book.save(function (err) {
                 if (err)
