@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var userModel = new Schema({
     username: {type: String},
-    Email: {type: String},
+    email: {type: String},
     password: {type: String},
     image_url: {type: String}
 });
